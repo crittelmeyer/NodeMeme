@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "A meme generator in Node/Express, React.js/ES6, & SCSS",
   "author": "Chris Rittelmeyer <crittelmeyer@floatingtree.com>",
-  "contributors": [{
-    "name": "Sam Reaves",
-    "email": "thesamreaves@gmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Sam Reaves",
+      "email": "thesamreaves@gmail.com"
+    }
+  ],
   "bin": {
     "module-name": "./bin/module-name"
   },
@@ -30,6 +32,7 @@
     "winston": "git://github.com/flatiron/winston#master"
   },
   "devDependencies": {
+    "gulp": "^3.9.0"
   },
   "license": "MIT"
 }
