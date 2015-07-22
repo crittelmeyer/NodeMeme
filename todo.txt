@@ -1,0 +1,6 @@
+DB: MySQL
+Front End: React, ES6, Webpack, SCSS, Gulp?
+Server: Express, Logger, Arg Processor
+Unit Testing: Mocha, Sinon (or just Jest?)
+API Diagramming: UML
+Front End Comps: Sketch 
