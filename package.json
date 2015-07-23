@@ -14,7 +14,8 @@
   },
   "scripts": {
     "predeploy": "echo im about to deploy",
-    "postdeploy": "echo ive deployed"
+    "postdeploy": "echo ive deployed",
+    "start": "gulp server"
   },
   "repository": {
     "type": "git",
