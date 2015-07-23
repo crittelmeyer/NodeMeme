@@ -1,15 +1,10 @@
-/* 
-
-	app.js
-
-	Initializes server. Sets up static content. Establishes routes and 
-	their handlers.
-
-	Written by Sam Reaves
-	July 22, 2015
-
+/**
+ * @name NodeMeme Server
+ * @file app.js
+ * @description Initializes server. Sets up static content. Establishes routes and their handlers.
+ * @author Sam Reaves
+ * @date July 22, 2015
  */
-
 
 // Import Express and initialize server.
 var express = require('express'),
