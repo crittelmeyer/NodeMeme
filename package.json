@@ -10,7 +10,7 @@
     }
   ],
   "bin": {
-    "module-name": "./bin/module-name"
+    "NodeMeme": "./bin/NodeMeme"
   },
   "scripts": {
     "predeploy": "echo im about to deploy",
