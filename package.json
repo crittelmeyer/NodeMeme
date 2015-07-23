@@ -14,7 +14,8 @@
   },
   "scripts": {
     "predeploy": "echo im about to deploy",
-    "postdeploy": "echo ive deployed"
+    "postdeploy": "echo ive deployed",
+    "start": "gulp serve"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,9 @@
     "winston": "git://github.com/flatiron/winston#master"
   },
   "devDependencies": {
-    "gulp": "^3.9.0"
+    "connect-livereload": "^0.5.3",
+    "gulp": "^3.9.0",
+    "gulp-express": "^0.3.5"
   },
   "license": "MIT"
 }
