@@ -11,10 +11,16 @@
  */
 
 
-// Import Express and initialize server. 
+// Import Express and initialize server.
 var express = require('express'),
 	app = module.exports.app = exports.app = express(),
-	path = require('path');
+	path = require('path'),
+	server,
+	host,
+	port,
+	util = require('./util');
+
+app.use(require('connect-livereload')());
 
 // Establish static directory at client/public
 app.use(express.static(path.join(__dirname, '../client/static')));
@@ -25,12 +31,15 @@ app.get('/', function(req, res) {
 });
 
 // Server starts listening on port 3000.
-var server = app.listen(3000, function() {
-  
-  // Grab host and port from server's address method
-  var host = server.address().address,
-  	  port = server.address().port;
+server = app.listen(3000, function() {
 
-  // Logs a message to let dev know we're up and running.
-  console.log('Example app listening at http://%s:%s', host, port);
+    // Set host and port
+  	util.getDynamicIP(function(err, ip) {
+		host = ip;
+	});
+
+  	port = server.address().port;
+
+  	// Logs a message to let dev know we're up and running.
+  	console.log('Example app listening at http://%s:%s', host, port);
 });
