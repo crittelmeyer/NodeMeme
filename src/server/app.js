@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, '../client/static')));
 
 // Route handler for root - sends current static landing page
 app.get('/', function(req, res) {
-  res.sendfile("index.html");
+  res.sendfile('index.html');
 });
 
 // Server starts listening on port 3000.
