@@ -5,12 +5,15 @@ module.exports = {
         var ip;
         try {
             var address = osDetails.networkInterfaces();
+//console.log(address);
             for (key in address) {
                 if (address.hasOwnProperty(key)) {
-                    if (address[key][0].internal === false && address[key][0].family === 'IPv4') {
-                        ip = address[key][0].address;
-                        break;
-                    }
+                    address[key].forEach(function(entry) {
+                        if (entry.family === 'IPv4') {
+                            ip = entry.address;
+                            return false;
+                        }
+                    });
                 }
             }
         } catch (e) {
