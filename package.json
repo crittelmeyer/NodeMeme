@@ -32,11 +32,14 @@
     "express": "4.2.x",
     "gulp": "^3.9.0",
     "gulp-live-server": "0.0.23",
+    "react": "^0.13.3",
     "winston": "git://github.com/flatiron/winston#master"
   },
   "devDependencies": {
     "connect-livereload": "^0.5.3",
-    "run-sequence": "^1.1.2"
+    "run-sequence": "^1.1.2",
+    "gulp-react": "^3.0.1",
+    "gulp-rimraf": "^0.1.1"
   },
   "license": "MIT"
 }

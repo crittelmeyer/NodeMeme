@@ -1,9 +1,14 @@
 console.log('hey!!!');
 
-var test = React.createClass({
+var Test = React.createClass({
     render: function() {
         return (
-            <div>test</div>
+            <div>{this.props.msg}</div>
         );
     }
 });
+
+React.render(
+    <Test msg="React really works!" />,
+    document.getElementById('content')
+);

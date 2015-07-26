@@ -18,7 +18,7 @@ var express = require('express'),
 app.use(require('connect-livereload')());
 
 // Establish static directory at client/public
-app.use(express.static(path.join(__dirname, '../client/static')));
+app.use(express.static(path.join(__dirname, '../client/')));
 
 // Route handler for root - sends current static landing page
 app.get('/', function(req, res) {
