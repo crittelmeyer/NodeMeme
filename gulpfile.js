@@ -22,10 +22,10 @@
 var gulp = require('gulp');
 var gls = require('gulp-live-server');
 var runSequence = require('run-sequence');
-var react = require('gulp-react');
+var babel = require('gulp-babel');
+var sass = require('gulp-sass');
 
 var server = gls.new('dist/server/app.js');
-
 
 /**
  * @name default
@@ -57,10 +57,6 @@ gulp.task('copy', function() {
     gulp.src('src/client/index.html')
         .pipe(gulp.dest('dist/client'));
 
-    //TODO: remove once SCSS task is complete
-    gulp.src('src/client/**/*.css')
-        .pipe(gulp.dest('dist/client'));
-
     gulp.src('src/client/**/*.jpg')
         .pipe(gulp.dest('dist/client'));
 
@@ -72,37 +68,32 @@ gulp.task('copy', function() {
 });
 
 /**
- * @name jsx
- * @desc The JSX compilation task - converts all JSX files into JS and moves them to dist
+ * @name babel
+ * @desc The Babel compilation task - converts all JSX files & ES6 syntax into JS and moves them to dist
  */
-gulp.task('jsx', function() {
+gulp.task('babel', function() {
     return gulp.src('src/client/**/*.jsx')
-        .pipe(react())
+        .pipe(babel())
         .pipe(gulp.dest('dist/client'));
 });
 
-///**
-// * @name es6
-// * @desc The ES6 compilation task - converts all ES6 syntax down to ES5
-// */
-//gulp.task('es6', function() {
-//
-//});
+/**
+* @name scss
+* @desc The scss compilation task - converts all SCSS to CSS
+*/
+gulp.task('scss', function() {
+    gulp.src('src/client/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('dist/client'));
+});
 
-///**
-// * @name scss
-// * @desc The scss compilation task - converts all SCSS to CSS
-// */
-//gulp.task('scss', function() {
-//
-//});
 
 /**
  * @name compile
  * @desc The overall compilation task - compiles JSX, SCSS, ES6, etc.
  */
-//gulp.task('compile', gulp.parallel('jsx'));//, 'es6', 'scss');
-gulp.task('compile', ['jsx']);//, 'es6', 'scss']);
+//gulp.task('compile', gulp.parallel('babel', 'scss'));
+gulp.task('compile', ['babel', 'scss']);
 
 /**
 * @name version
@@ -141,43 +132,38 @@ gulp.task('staticwatch', function() {
 });
 
 /**
- * @name jsxwatch
- * @desc Watches JSX files and compiles them into build directory when saved changes are detected.
+ * @name babelwatch
+ * @desc Watches JS files and compiles them into build directory when saved changes are detected.
  */
-gulp.task('jsxwatch', function() {
+gulp.task('babelwatch', function() {
 
     //compile all JSX when any JSX files change
     //gulp.watch('src/client/**/*.jsx', gulp.series('jsx'));
-    gulp.watch('src/client/**/*.jsx', ['jsx']);
+    gulp.watch('src/client/**/*.jsx', ['babel']);
+
+    //compile all JS (potentially ES6 syntax) when any JS files change
+    //gulp.watch('src/client/**/*.jsx', gulp.series('jsx'));
+    //todo: test if this even works... also, maybe we can condense these two watches into one line:
+    //gulp.watch('src/client/**/*.js*', ['babel']);     ?
+    gulp.watch('src/client/**/*.js', ['babel']);
 });
 
-///**
-// * @name scsswatch
-// * @desc Watches SCSS files and compiles them into build directory when saved changes are detected.
-// */
-//gulp.task('scsswatch', function() {
-//
-//    //compile all SCSS when any SCSS files change
-//    //gulp.watch('src/client/**/*.scss', gulp.series('scss'));
-//    gulp.watch('src/client/**/*.scss', ['scss']);
-//});
-
 /**
- * @name es6watch
- * @desc Watches ES6 files and compiles them into build directory when saved changes are detected.
- */
-gulp.task('es6watch', function() {
+* @name scsswatch
+* @desc Watches SCSS files and compiles them into build directory when saved changes are detected.
+*/
+gulp.task('scsswatch', function() {
 
     //compile all SCSS when any SCSS files change
     //gulp.watch('src/client/**/*.scss', gulp.series('scss'));
-    gulp.watch('src/client/**/*.js', ['es6']);
+    gulp.watch('src/client/**/*.scss', ['scss']);
 });
 
 /**
  * @name watch
  * @desc The watch task - watches for changes to source files and triggers appropriate compile tasks.
  */
-gulp.task('watch', ['staticwatch', 'jsxwatch']);//, 'scsswatch', 'es6watch']);
+gulp.task('watch', ['staticwatch', 'babelwatch', 'scsswatch']);
 
 /**
  * @name livereload
