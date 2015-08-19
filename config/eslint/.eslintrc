@@ -1,3 +1,9 @@
+/*
+ * this file defines lint rules that override default lint rules for js source files
+ * you can see a list of default rules and descriptions/purposes for each here:
+ * http://eslint.org/docs/rules/
+ */
+
 {
   "ecmaFeatures": {
     "arrowFunctions": true,
