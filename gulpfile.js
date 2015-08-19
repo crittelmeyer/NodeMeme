@@ -206,6 +206,12 @@ gulp.task('serve', function() {
 gulp.task('develop', ['serve', 'watch']);
 
 /**
+ * @name lint
+ * @desc The lint task - Runs eslint and scsslint tasks.
+ */
+gulp.task('lint', ['eslint']);//, 'scsslint']);
+
+/**
 * @name eslint
 * @desc The eslint task - Runs eslint using specified rules.
 */

@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "connect-livereload": "^0.5.3",
+    "eslint-plugin-react": "^3.2.3",
     "gulp-babel": "^5.2.0",
     "gulp-eslint": "^1.0.0",
     "gulp-react": "^3.0.1",
