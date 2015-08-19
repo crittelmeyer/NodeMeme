@@ -2,10 +2,12 @@ var osDetails = require('os');
 
 module.exports = {
     getDynamicIP: function(callback) {
-        var ip;
+        var address,
+            key,
+            ip;
+
         try {
-            var address = osDetails.networkInterfaces();
-//console.log(address);
+            address = osDetails.networkInterfaces();
             for (key in address) {
                 if (address.hasOwnProperty(key)) {
                     address[key].forEach(function(entry) {

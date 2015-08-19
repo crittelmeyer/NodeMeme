@@ -216,8 +216,17 @@ gulp.task('lint', ['eslint']);//, 'scsslint']);
 * @desc The eslint task - Runs eslint using specified rules.
 */
 gulp.task('eslint', function() {
+    var eslintOptions = {
+        configFile: 'config/eslint/.eslintrc',
+        rulePaths: ['config/eslint/custom_rules'],
+        envs: [
+            'browser',
+            'node'
+        ]
+    };
+
     return gulp.src(['src/**/*.js'])
-        .pipe(eslint())
+        .pipe(eslint(eslintOptions))
         .pipe(eslint.format())
         .pipe(eslint.failOnError());
 });
