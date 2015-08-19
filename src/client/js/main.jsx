@@ -6,7 +6,7 @@ var Test = React.createClass({
     }
 });
 
-var foo = 'babel@';
+var foo = 'babel';
 
 React.render(
     <Test msg={`React really works! Or does it? ${foo}!!!`} />,
