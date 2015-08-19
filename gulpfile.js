@@ -146,6 +146,10 @@ gulp.task('babelwatch', function() {
     //todo: test if this even works... also, maybe we can condense these two watches into one line:
     //gulp.watch('src/client/**/*.js*', ['babel']);     ?
     gulp.watch('src/client/**/*.js', ['babel']);
+
+    // Watch server files as well
+    gulp.watch('src/server/**/*.js', ['babel']);
+
 });
 
 /**
@@ -193,7 +197,7 @@ gulp.task('serve', function() {
     //not sure what, if any, benefit there would be from doing it one way or the other...
 
     //enable live reloading by watching for trigger filetypes (html, css, js, etc) and notifying the server
-    gulp.watch(['dist/client/**/*.html', 'dist/client/**/*.css', 'dist/client/**/*.js'], ['livereload']);
+    gulp.watch(['dist/client/**/*.html', 'dist/client/**/*.css', 'dist/client/**/*.js', 'dist/server/**/*.js'], ['livereload']);
 
 });
 
