@@ -1,5 +1,27 @@
-$color: blue;
+$color: #222;
+$textColor: #FFF;
+$linkColor: #09F;
 
 body {
   background-color: $color;
+  color: $textColor
+}
+
+.header {
+	text-align: center;
+}
+
+#content > div {
+	text-align: center;
+}
+
+a {
+	color: $linkColor;
+	text-decoration: none;
+
+}
+
+li {
+	display: inline-block;
+	margin-right: 1rem;
 }
