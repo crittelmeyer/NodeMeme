@@ -24,6 +24,7 @@ var gls = require('gulp-live-server');
 var runSequence = require('run-sequence');
 var babel = require('gulp-babel');
 var sass = require('gulp-sass');
+var eslint = require('gulp-eslint');
 
 var server = gls.new('dist/server/app.js');
 
@@ -208,13 +209,31 @@ gulp.task('serve', function() {
 //gulp.task('develop', gulp.parallel('serve', 'watch'));
 gulp.task('develop', ['serve', 'watch']);
 
-///**
-// * @name eslint
-// * @desc The eslint task - Runs eslint using specified rules.
-// */
-//gulp.task('eslint', function() {
-//
-//});
+/**
+ * @name lint
+ * @desc The lint task - Runs eslint and scsslint tasks.
+ */
+gulp.task('lint', ['eslint']);//, 'scsslint']);
+
+/**
+* @name eslint
+* @desc The eslint task - Runs eslint using specified rules.
+*/
+gulp.task('eslint', function() {
+    var eslintOptions = {
+        configFile: 'config/eslint/.eslintrc',
+        rulePaths: ['config/eslint/custom_rules'],
+        envs: [
+            'browser',
+            'node'
+        ]
+    };
+
+    return gulp.src(['src/**/*.js'])
+        .pipe(eslint(eslintOptions))
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
+});
 
 ///**
 // * @name scsslint
