@@ -25,6 +25,7 @@ var runSequence = require('run-sequence');
 var babel = require('gulp-babel');
 var sass = require('gulp-sass');
 var eslint = require('gulp-eslint');
+var scsslint = require('gulp-scss-lint');
 
 var server = gls.new('dist/server/app.js');
 
@@ -210,15 +211,9 @@ gulp.task('serve', function() {
 gulp.task('develop', ['serve', 'watch']);
 
 /**
- * @name lint
- * @desc The lint task - Runs eslint and scsslint tasks.
+ * @name eslint
+ * @desc The eslint task - Runs eslint using specified rules.
  */
-gulp.task('lint', ['eslint']);//, 'scsslint']);
-
-/**
-* @name eslint
-* @desc The eslint task - Runs eslint using specified rules.
-*/
 gulp.task('eslint', function() {
     var eslintOptions = {
         configFile: 'config/eslint/.eslintrc',
@@ -235,18 +230,20 @@ gulp.task('eslint', function() {
         .pipe(eslint.failOnError());
 });
 
-///**
-// * @name scsslint
-// * @desc The scsslint task - Runs scsslint using specified rules.
-// */
-//gulp.task('scsslint', function() {
-//
-//});
+/**
+ * @name scsslint
+ * @desc The lint task - runs both eslint and scsslint tasks
+ */
+gulp.task('scsslint', function() {
+    gulp.src('src/**/*.scss')
+        .pipe(scsslint());
+});
 
 /**
  * @name lint
- * @desc The lint task - runs both eslint and scsslint tasks
+ * @desc The lint task - Runs eslint and scsslint tasks.
  */
+gulp.task('lint', ['eslint', 'scsslint']);
 //gulp.task('lint', gulp.parallel('eslint', 'scsslint'));
 
 /**
